@@ -1,0 +1,150 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" href="{% static 'blog/img/favicon.png' %}"
+          type="image/gif" sizes="16x16">
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">    
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'blog/css/main.css' %}">
+    <title>NCC BUDDIES</title>
+</head>
+<body>
+    <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-blue fixed-top">
+        <div class="container">
+          <a class="navbar-brand mr-4"
+             href="{% url 'blog:home' %}"><span class="ncc-title">NCC</span><span class="buddies-title"> BUDDIES</span></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse"
+                  data-target="#navbarToggle" aria-controls="navbarToggle"
+                  aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+              
+            </div>
+            <div class="navbar-nav">
+              {% if user.is_authenticated %}
+                <a class="nav-item nav-link" href="{% url 'blog:home' %}">Home</a>
+
+                <a class="nav-item nav-link" href="{% url 'blog:search' %}">Search
+                </a>
+                <a class="nav-item nav-link" href="{% url 'profile' request.user.username %}">Profile
+                </a>
+                <a class="nav-item nav-link" href="{% url 'blog:notifications' request.user.username %}">
+                  Notification <span class="badge badge-light" style="display: none;" id="notifications-count"></span>
+                </a>
+              {% else %}
+                <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+                <a class="nav-item nav-link" href="{% url 'register' %}">Register
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main role="main" class="container">
+      <div class="row">
+        <div class="col-lg-8">
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+          {% block content %}{% endblock %}
+        </div>
+        <div class="col-lg-4">
+          <div class="content-section-sidebar" id="facts-div">
+            <h3 class="sidebar-heading">Facts</h3>
+            
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="footer">
+      <a href="{% url 'community:about' %}">About</a>
+      <a href="{% url 'community:contact' %}">Contact</a>
+      <a href="{% url 'community:contribute' %}">Contribute</a>
+      <a href="{% url 'community:sponsor' %}">Sponsor</a>
+      <a href="{% url 'community:guidelines' %}">Guidelines</a>
+      <div class="tag-line">
+        <a href="">NCC BUDDIES MADE WITH ❤️ IN INDIA</a>
+      </div>
+    </footer>
+    
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <script src="{% static 'blog/js/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'blog/js/infinite.min.js ' %}"></script>
+    
+{% block script %}{% endblock %}
+
+{% if user.is_authenticated %}
+
+    <script type="text/javascript">
+      $(document).ready(function(){
+
+        $.ajax({
+                url: "{% url 'blog:notifications-count' request.user.username %}",
+                type: 'get',
+                success: function(data){
+                  if (data.count===0) {
+                    $('#notifications-count').hide()
+                  }
+                  else {
+                    $('#notifications-count').show()
+                    $('#notifications-count').text(data.count)
+                  }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                }
+            });
+      });
+    </script>
+    {% endif %}
+    <script type="text/javascript">
+      $.ajax({
+                url: "{% url 'community:facts' %}",
+                type: 'get',
+                success: function(data){
+                  
+                  data.facts.forEach(myFunc)
+                  function myFunc(fact) {
+                    $('#facts-div').append('<p class=text-muted>"'+fact+'"</p>')
+                  }
+                  
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                }
+            });
+    </script>
+    <script>
+
+    $(document).ready(function(){
+
+        $("form").attr("enctype","multipart/form-data");
+
+    });
+
+    </script> 
+</body>
+</html>
