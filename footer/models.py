@@ -15,3 +15,9 @@ class Facts(models.Model):
 	date = models.DateTimeField(default=timezone.now)
 	def __str__(self):
 		return self.fact
+
+class Quote(models.Model):
+	quote= models.TextField()
+	date = models.DateTimeField(default=timezone.now)
+	def __str__(self):
+		return self.quote

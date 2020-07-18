@@ -96,16 +96,13 @@ class Notification(models.Model):
 # SIGNALS
 @receiver(post_save,sender=Post)
 def post_mentioned_notify(sender, instance, *args, **kwargs):
-    print(instance.author.pk)
     sender = User.objects.get(pk=instance.author.pk)
     post = Post.objects.get(pk=instance.pk)
     string = instance.content
     poss_users = [i  for i in string.split() if i.startswith("@")]
-    print(poss_users)
     poss_users_list = []
     for user in poss_users:
         poss_users_list.append(user[1:])
-    print(poss_users_list)
 
     for username in poss_users_list:
         try:
@@ -113,11 +110,10 @@ def post_mentioned_notify(sender, instance, *args, **kwargs):
         except:
             continue
         if get_user in instance.tagged_users.all():
-            print('in tagged users')
+            continue
         elif get_user == sender:
-            print('sender not notify')
+            continue
         else:
-            print('in else')
             instance.tagged_users.add(get_user)
             notify = Notification.objects.create(sender=sender,receiver=get_user,post=post,action="mentioned you in post")
 

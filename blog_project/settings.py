@@ -25,7 +25,11 @@ INSTALLED_APPS = [
     'blog',
     'users.apps.UsersConfig',
     'footer',
+    'dbbackup',
 ]
+
+DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
+DBBACKUP_STORAGE_OPTIONS = {'location':  os.path.join(BASE_DIR, 'backup')}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -58,13 +62,31 @@ TEMPLATES = [
 WSGI_APPLICATION = 'blog_project.wsgi.application'
 
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
 
+    'default': {
+
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+
+        'NAME': 'ncc_buddies_com',
+
+        'USER': 'postgres',
+
+        'PASSWORD': 'admin123',
+
+        'HOST': 'localhost',
+
+        'PORT': '5432',
+
+    }
+
+}
 
 
 AUTH_PASSWORD_VALIDATORS = [
