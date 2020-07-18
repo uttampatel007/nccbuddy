@@ -25,7 +25,6 @@ INSTALLED_APPS = [
     'blog',
     'users.apps.UsersConfig',
     'footer',
-    'dbbackup',
 ]
 
 DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
@@ -85,7 +84,6 @@ DATABASES = {
         'PORT': '5432',
 
     }
-
 }
 
 
