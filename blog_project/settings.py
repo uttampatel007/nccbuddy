@@ -61,12 +61,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'blog_project.wsgi.application'
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
+
 DATABASES = {
 
     'default': {
@@ -138,3 +133,6 @@ LOGIN_URL = 'login'
 ADMIN_SITE_HEADER = "BUDDIES"
 
 TIME_ZONE =  'Asia/Kolkata'
+
+
+

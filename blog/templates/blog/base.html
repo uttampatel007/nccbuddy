@@ -17,7 +17,12 @@
 </head>
 <body>
     <header class="site-header">
+      {% if user.is_authenticated %}
+      <nav class="navbar navbar-expand-md navbar-dark bg-blue fixed-top d-none d-md-block">
+      {% else %}
       <nav class="navbar navbar-expand-md navbar-dark bg-blue fixed-top">
+      {% endif %}
+
         <div class="container">
           <a class="navbar-brand mr-4"
              href="{% url 'blog:home' %}"><span class="ncc-title">NCC</span><span class="buddies-title"> BUDDIES</span></a>
@@ -50,6 +55,46 @@
           </div>
         </div>
       </nav>
+      {% if user.is_authenticated %}
+      <div class="d-block d-md-none">
+      <nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-blue navbar-mobile">
+          <div class="icon-navbar">
+            <a class="" href="{% url 'blog:home' %}">
+            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+              width="24" height="24"
+              viewBox="0 0 172 172"
+              style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ecf0f1"><path d="M86,15.0472l-78.83333,70.9528h21.5v64.5h43v-43h28.66667v43h43v-64.5h21.5z"></path></g></g></svg>
+            </a>
+          </div>
+          <div class="icon-navbar">
+            <a class="" href="{% url 'blog:search' %}">
+            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+              width="24" height="24"
+              viewBox="0 0 172 172"
+              style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ecf0f1"><path d="M72.24,10.32c-32.33062,0 -58.48,26.14938 -58.48,58.48c0,32.33063 26.14938,58.48 58.48,58.48c11.54281,0 22.22563,-3.38625 31.2825,-9.1375l42.2475,42.2475l14.62,-14.62l-41.71,-41.6025c7.49813,-9.83625 12.04,-22.02406 12.04,-35.3675c0,-32.33062 -26.14937,-58.48 -58.48,-58.48zM72.24,24.08c24.76531,0 44.72,19.95469 44.72,44.72c0,24.76531 -19.95469,44.72 -44.72,44.72c-24.76531,0 -44.72,-19.95469 -44.72,-44.72c0,-24.76531 19.95469,-44.72 44.72,-44.72z"></path></g></g></svg>
+            </a>
+          </div>
+          <div class="icon-navbar">
+            <a class="" href="{% url 'blog:notifications' request.user.username %}">
+            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+              width="24" height="24"
+              viewBox="0 0 172 172"
+              style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ecf0f1"><path d="M86,14.33333c-5.934,0 -10.75,4.816 -10.75,10.75v4.98307c-18.54017,4.78017 -32.25,21.56943 -32.25,41.60026v43l-14.33333,14.33333v7.16667h114.66667v-7.16667l-14.33333,-14.33333v-43c0,-20.03083 -13.70983,-36.8061 -32.25,-41.58626v-4.99707c0,-5.934 -4.816,-10.75 -10.75,-10.75zM71.66667,143.33333c0,7.91917 6.42133,14.33333 14.33333,14.33333c7.912,0 14.33333,-6.42133 14.33333,-14.33333z"></path></g></g></svg>
+              <small><span class="badge-color" id="notifications-count-2" style="display: none;"></span></small>
+
+            </a>
+          </div>
+          <div class="icon-navbar">
+            <a class="" href="{% url 'profile' request.user.username %}">
+            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+              width="24" height="24"
+              viewBox="0 0 172 172"
+              style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ecf0f1"><path d="M86,21.5c-15.83216,0 -28.66667,12.8345 -28.66667,28.66667c0,15.83216 12.8345,28.66667 28.66667,28.66667c15.83216,0 28.66667,-12.8345 28.66667,-28.66667c0,-15.83216 -12.8345,-28.66667 -28.66667,-28.66667zM86,100.33333c-21.52867,0 -64.5,10.80733 -64.5,32.25v10.75c0,3.956 3.21067,7.16667 7.16667,7.16667h114.66667c3.956,0 7.16667,-3.21067 7.16667,-7.16667v-10.75c0,-21.44267 -42.97133,-32.25 -64.5,-32.25z"></path></g></g></svg>
+            </a>
+          </div>
+      </nav>
+      </div>
+      {% endif %}
     </header>
     <main role="main" class="container">
       <div class="row">
@@ -80,6 +125,9 @@
         </div>
       </div>
     </main>
+
+
+
     <footer class="footer">
       <a href="{% url 'community:about' %}">About</a>
       <a href="{% url 'community:contact' %}">Contact</a>
@@ -117,10 +165,14 @@
                 success: function(data){
                   if (data.count===0) {
                     $('#notifications-count').hide()
+                    $('#notifications-count-2').hide()
                   }
                   else {
                     $('#notifications-count').show()
+                    $('#notifications-count-2').show()
                     $('#notifications-count').text(data.count)
+                    $('#notifications-count-2').text(data.count)
+
                   }
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
