@@ -1,12 +1,15 @@
- {% extends "blog/base.html" %} 
- {% load crispy_forms_tags %}
-  {% block content %}
+{% extends "blog/base.html" %} 
+{% load crispy_forms_tags %}
+{% block title %}<title> @{{request.user.username}} - NCC BUDDIES</title>{% endblock %}
+{% block content %}
+
 <style type="text/css">
 .col-lg-8 p {
     margin-top: 0;
     margin-bottom: 0;
 }
 </style>
+
 <div class="content-section-orange">
     <div class="media">
         <div class="profile-image-div">

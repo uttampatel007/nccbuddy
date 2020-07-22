@@ -1,4 +1,7 @@
  {% extends "blog/base.html" %} 
+ {% block title %}
+   <title>Confirm delete * {{post.title}} - NCC BUDDIES</title> 
+ {% endblock %}
  {% block content %}
 <div class="content-section">
     <form method="POST">
@@ -15,7 +18,6 @@
                href="{% url 'blog:post-detail' post.id %}">Cancel
             </a>
             <br><small>Once post deleted there is now way it can be bring back.</small>
-
         </div>
     </form>
 </div>

@@ -1,5 +1,8 @@
 {% extends "blog/base.html" %}
 {% load crispy_forms_tags %}
+ {% block title %}
+   <title>Add post * @{{request.user.username}} - NCC BUDDIES</title> 
+ {% endblock %}
 {% block content %}
 
 </style>
@@ -17,12 +20,13 @@
         <div class="loading-bar" style="display: none;">
             <div class="progress">
                 <div id="progress-bar" class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" aria-valuenow="0"aria-valuemin="0" aria-valuemax="100" style="width: 0%">0%</div>
-                </div>
             </div>
-            <div><br><br>
+             <div><br><br>
                 <p>"If death strikes before I prove my blood, I swear I’ll kill Death."</p>
                 <p style="text-align: right;">-Capt Manoj Kumar Pandey PVC 1/11 Gurkha Rifles</p>
             </div>
+        </div>
+           
     </div>
 {% endblock content %}
 
