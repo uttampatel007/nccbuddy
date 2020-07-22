@@ -61,25 +61,45 @@ TEMPLATES = [
 WSGI_APPLICATION = 'blog_project.wsgi.application'
 
 
+if DEBUG:
+    DATABASES = {
 
-DATABASES = {
+        'default': {
 
-    'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
 
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'ncc_buddies_com',
 
-        'NAME': 'ncc_buddies_com',
+            'USER': 'postgres',
 
-        'USER': 'postgres',
+            'PASSWORD': 'admin123',
 
-        'PASSWORD': 'admin123',
+            'HOST': 'localhost',
 
-        'HOST': 'localhost',
+            'PORT': '5432',
 
-        'PORT': '5432',
-
+        }
     }
-}
+else:
+    DATABASES = {
+
+        'default': {
+
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+
+            'NAME': 'ncc_buddies_com',
+
+            'USER': 'admin',
+
+            'PASSWORD': 'admin123',
+
+            'HOST': 'localhost',
+
+            'PORT': '',
+
+        }
+    }
+
 
 
 AUTH_PASSWORD_VALIDATORS = [
