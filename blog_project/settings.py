@@ -89,7 +89,7 @@ else:
 
             'NAME': 'ncc_buddies_com',
 
-            'USER': 'postgres',
+            'USER': 'admin',
 
             'PASSWORD': 'admin123',
 
