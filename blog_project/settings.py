@@ -93,7 +93,7 @@ else:
 
             'PASSWORD': 'admin123',
 
-            'HOST': '',
+            'HOST': 'localhost',
 
             'PORT': '',
 
