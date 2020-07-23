@@ -4,7 +4,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = '6+_(6czw@+gbm$5q@j6u#ubk^)19o&0+3wi!2u(%x^^y^!d(j#'
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['142.93.221.196']
 
@@ -60,28 +60,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'blog_project.wsgi.application'
 
-
-if DEBUG:
-    DATABASES = {
-
-        'default': {
-
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-
-            'NAME': 'ncc_buddies_com',
-
-            'USER': 'postgres',
-
-            'PASSWORD': 'admin123',
-
-            'HOST': 'localhost',
-
-            'PORT': '5432',
-
-        }
-    }
-else:
-    DATABASES = {
+DATABASES = {
 
         'default': {
 
