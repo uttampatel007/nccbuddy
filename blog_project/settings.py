@@ -6,7 +6,7 @@ SECRET_KEY = '6+_(6czw@+gbm$5q@j6u#ubk^)19o&0+3wi!2u(%x^^y^!d(j#'
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['142.93.221.196']
+ALLOWED_HOSTS = ['127.0.0.1']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -16,15 +16,19 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    
+    # My_apps.
+    'blog',
+    'users.apps.UsersConfig',
+    'footer',
+
     # Third_party_apps.
     'crispy_forms',
     # taggit
     'taggit',
     'imagekit', #forthumbnails
-    # My_apps.
-    'blog',
-    'users.apps.UsersConfig',
-    'footer',
+    'storages',
+
 ]
 
 DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
@@ -61,25 +65,11 @@ TEMPLATES = [
 WSGI_APPLICATION = 'blog_project.wsgi.application'
 
 DATABASES = {
-
-        'default': {
-
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-
-            'NAME': 'ncc_buddies_com',
-
-            'USER': 'admin',
-
-            'PASSWORD': 'admin123',
-
-            'HOST': 'localhost',
-
-            'PORT': '',
-
-        }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
-
-
+}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -99,8 +89,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Africa/Accra'
-
 USE_I18N = True
 
 USE_L10N = True
@@ -113,7 +101,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -134,4 +122,13 @@ ADMIN_SITE_HEADER = "BUDDIES"
 TIME_ZONE =  'Asia/Kolkata'
 
 
+AWS_ACCESS_KEY_ID = 'AKIA5IE4BZ6PTPNAFNNB'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'ncc-files'
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
+
+AWS_S3_REGION_NAME = 'ap-south-1' 
+AWS_S3_SIGNATURE_VERSION = 's3v4'
