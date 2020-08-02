@@ -14,20 +14,13 @@ class Post(models.Model):
     title = models.CharField(max_length=100)
     content =  models.TextField()
     image =  models.ImageField(upload_to='post_images')
-    # image_thumbnail = ImageSpecField(source='image',
-    #                                   processors=[ 
-    #                                     Transpose(),
-    #                                     ResizeToFill(1000, 500)
-    #                                     ],
-    #                                   format='JPEG',
-    #                                   options={'quality': 90})
-
-    # image_thumbnail_detail = ImageSpecField(source='image',
-    #                                   processors=[ 
-    #                                     Transpose(),
-    #                                     ],
-    #                                   format='JPEG',
-    #                                   options={'quality': 80})
+    image_thumbnail = ImageSpecField(source='image',
+                                      processors=[ 
+                                        Transpose(),
+                                        ResizeToFill(1000, 500)
+                                        ],
+                                      format='JPEG',
+                                      options={'quality': 70})
 
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)

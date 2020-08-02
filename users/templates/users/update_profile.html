@@ -37,15 +37,15 @@
 
 <script type="text/javascript">
     $(document).ready(function(){
-        $('#div_id_image').children('div').addClass('currentPhoto');
-        $('.currentPhoto').children('a').hide();
-        let isTextNode = (_, el) => el.nodeType === Node.TEXT_NODE;
-        $('.currentPhoto').contents().filter(isTextNode).remove();
-        var img = document.createElement("IMG");
-        img.src = '{{ user.profile.image_thumbnail_user.url }}';
-        img.setAttribute('class', 'account-img');
-        $('.currentPhoto').prepend('<br>Change Image'); 
-        $('.currentPhoto').prepend(img);
+        // $('#div_id_image').children('div').addClass('currentPhoto');
+        // $('.currentPhoto').children('a').hide();
+        // let isTextNode = (_, el) => el.nodeType === Node.TEXT_NODE;
+        // $('.currentPhoto').contents().filter(isTextNode).remove();
+        // var img = document.createElement("IMG");
+        // img.src = '{{ user.profile.image_thumbnail_user.url }}';
+        // img.setAttribute('class', 'account-img');
+        // $('.currentPhoto').prepend('<br>Change Image'); 
+        // $('.currentPhoto').prepend(img);
         $('#hint_id_camps').html('Add comma between Camps you have attended!');
         $('#div_id_camps label').html('Camps*');
 

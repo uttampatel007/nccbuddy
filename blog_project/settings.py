@@ -26,7 +26,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     # taggit
     'taggit',
-    'imagekit', #forthumbnails
+    #forthumbnails
+    'imagekit', 
     'storages',
 
 ]
@@ -117,6 +118,7 @@ LOGIN_URL = 'login'
 # EMAIL_PORT = 587
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
+
 ADMIN_SITE_HEADER = "BUDDIES"
 
 TIME_ZONE =  'Asia/Kolkata'
@@ -127,8 +129,7 @@ AWS_SECRET_ACCESS_KEY = 'MSF9d6lOJksTFZPAekUMXCZlsIOJUbgKN6+ZfXbg'
 AWS_STORAGE_BUCKET_NAME = 'ncc-files'
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
+DEFAULT_FILE_STORAGE = 'blog_project.patch_img_uploade.CustomS3Boto3Storage'
 
 AWS_S3_REGION_NAME = 'ap-south-1' 
 AWS_S3_SIGNATURE_VERSION = 's3v4'

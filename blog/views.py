@@ -92,7 +92,7 @@ def post_update_view(request,pk):
             post=form.save(commit=False)
             post.author = request.user
             post.save()
-            ctx = {'url':post1.get_absolute_url()}
+            ctx = {'url':post.get_absolute_url()}
             return HttpResponse(json.dumps(ctx), content_type='application/json')
     else:
         post = get_object_or_404(Post,pk=pk)

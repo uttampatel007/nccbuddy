@@ -1,4 +1,5 @@
 {% extends "blog/base.html" %}
+
 {% load crispy_forms_tags %}
 {% block title %}<title> {{post.title}} - NCC BUDDIES</title>{% endblock %}
 
@@ -41,7 +42,7 @@
     <div class="media-body">
       <h1 class="article-title">{{ post.title }}</h1>
       <hr>
-      <img class="post-image-detail" src="{{post.image_thumbnail_detail.url}}" loading="lazy">
+      <img class="post-image-detail" src="{{post.image.url}}">
       <br>
       <p class="article-content">{{ post.content }}</p>
     </div>

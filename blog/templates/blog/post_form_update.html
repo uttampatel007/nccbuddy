@@ -63,18 +63,18 @@
     });
    
 </script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     $(document).ready(function(){
         $('#div_id_image').children('div').addClass('currentPhoto');
         $('.currentPhoto').children('a').hide();
         let isTextNode = (_, el) => el.nodeType === Node.TEXT_NODE;
         $('.currentPhoto').contents().filter(isTextNode).remove();
         var img = document.createElement("IMG");
-        img.src = '{{ post.image_thumbnail_detail.url }}';
+        img.src = '{{ post.image_thumbnail.url }}';
         img.setAttribute('class', 'post-img-update');
         $('.currentPhoto').prepend('<br>Change Image'); 
         $('.currentPhoto').prepend(img);
     });
-</script>
+</script> -->
 
 {% endblock %}
