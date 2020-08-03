@@ -39,17 +39,17 @@ class Post(models.Model):
         return reverse('blog:post-detail', kwargs={'pk': self.pk})
 
     def whatsapp_share_url(self):
-        url = "https://wa.me/?text=http%3A//127.0.0.1:8000"+self.get_absolute_url()
+        url = "https://wa.me/?text=http%3A//nccbuddy.com"+self.get_absolute_url()
         return url
 
     def facebook_share_url(self):
-        url = "https://www.facebook.com/sharer/sharer.php?u=http%3A//127.0.0.1:8000"+self.get_absolute_url()
+        url = "https://www.facebook.com/sharer/sharer.php?u=http%3A//nccbuddy.com"+self.get_absolute_url()
         return url
 
     def twitter_share_url(self):
-        url = "https://twitter.com/intent/tweet?text=http%3A//127.0.0.1:8000"+self.get_absolute_url()
+        url = "https://twitter.com/intent/tweet?text=http%3A//nccbuddy.com"+self.get_absolute_url()
         return url
-
+        
 
 REASON = [
     

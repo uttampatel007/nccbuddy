@@ -114,6 +114,9 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = 'blog:home'
 LOGIN_URL = 'login'
 
+ADMIN_SITE_HEADER = "BUDDIES"
+
+TIME_ZONE =  'Asia/Kolkata'
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -125,9 +128,7 @@ EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'nccbuddy.com Team <noreply@nccbuddy.com>'
 
 
-ADMIN_SITE_HEADER = "BUDDIES"
 
-TIME_ZONE =  'Asia/Kolkata'
 
 
 AWS_ACCESS_KEY_ID = 'AKIA5IE4BZ6PTPNAFNNB'
