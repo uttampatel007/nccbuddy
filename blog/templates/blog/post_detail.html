@@ -1,6 +1,12 @@
 {% extends "blog/base.html" %}
 
 {% load crispy_forms_tags %}
+
+{% block meta %}
+  <meta name="description" content={{post.title}}>
+{% endblock %}
+
+
 {% block title %}<title> {{post.title}} - nccbuddy.com</title>{% endblock %}
 
 {% block content %}
