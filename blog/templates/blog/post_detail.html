@@ -232,5 +232,14 @@ $('#report-form').on('submit',function(event){
     })
   })
 </script>
-
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(".article-content").each(function(data){
+      var LinkReg = /(https?:\/\/[^\s]+)/g;
+      var LinkText = $(this).html().match(LinkReg)
+      var LinkText = $(this).html().replace(LinkReg, "<a href="+LinkText+">"+LinkText+"</a>")
+      $(this).html(LinkText)
+    })
+  })
+</script>
 {% endblock %}
