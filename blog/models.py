@@ -38,7 +38,7 @@ class Post(models.Model):
 
             
     def get_absolute_url(self):
-        return reverse('blog:post-detail', kwargs={'slug': self.sug})
+        return reverse('blog:post-detail', kwargs={'slug': self.slug})
 
     def whatsapp_share_url(self):
         url = "https://wa.me/?text=http%3A//nccbuddy.com"+self.get_absolute_url()
