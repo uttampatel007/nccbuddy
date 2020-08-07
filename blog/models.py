@@ -6,7 +6,7 @@ from django.utils import timezone
 from PIL import Image
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill,Transpose
-from django.db.models.signals import post_save,,pre_save
+from django.db.models.signals import post_save,pre_save
 from django.dispatch import receiver
 from django.template.defaultfilters import slugify
 
