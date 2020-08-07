@@ -13,7 +13,7 @@
 
             <a href="{% url 'profile' notification.sender.username %}" style="text-decoration: blink;">{{notification.sender.username}}</a> {{notification.action}} 
             {% if notification.post %}
-             <span class="post-title-notify"><a href="{% url 'blog:post-detail' notification.post.id %}">"{{notification.post.title}}".</a></span>
+             <span class="post-title-notify"><a href="{% url 'blog:post-detail' notification.post.slug %}">"{{notification.post.title}}".</a></span>
             {% endif %}
              <br><small>({{notification.timestamp|date:"D, d M, g:i a"}})</small>
           </p>

@@ -44,9 +44,8 @@ def home_view(request):
     else:
         return redirect('login')
 
-
-def post_detail_view(request,pk=None):
-    post = get_object_or_404(Post, pk=pk)
+def post_detail_view(request,slug=None):
+    post = get_object_or_404(Post, slug=slug)
 
     if request.method == 'POST':
         form = CommentForm(request.POST)
@@ -55,7 +54,7 @@ def post_detail_view(request,pk=None):
             comment.post=post
             comment.author=request.user
             comment.save()
-            return redirect('blog:post-detail', pk=post.pk)
+            return redirect('blog:post-detail', slug=post.slug)
     else:
         form = CommentForm()
         report_form = ReportPostForm()
@@ -64,6 +63,7 @@ def post_detail_view(request,pk=None):
 
     return render(request,'blog/post_detail.html',context)
 
+    
 @login_required
 def post_create_view(request):
     if request.method == 'POST':

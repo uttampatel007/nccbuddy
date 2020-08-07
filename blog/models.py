@@ -6,12 +6,14 @@ from django.utils import timezone
 from PIL import Image
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill,Transpose
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save,,pre_save
 from django.dispatch import receiver
+from django.template.defaultfilters import slugify
 
 
 class Post(models.Model):
     title = models.CharField(max_length=100)
+    slug = models.SlugField(null=True,unique=True)
     content =  models.TextField()
     image =  models.ImageField(upload_to='post_images')
     image_thumbnail = ImageSpecField(source='image',
@@ -120,3 +122,8 @@ def comment_added_notify(sender, instance, *args, **kwargs):
         pass
     else:
         notify = Notification.objects.create(sender=sender,receiver=receiver,post=post,action="commented on your post")
+
+
+@receiver(pre_save,sender=Post)
+def sulg_generator(sender, instance, *args, **kwargs):
+    instance.slug = slugify(instance.title)

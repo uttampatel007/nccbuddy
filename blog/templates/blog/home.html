@@ -22,11 +22,11 @@
               </div>
               <p class="h-font">
                 <a class="article-title"
-                     href="{% url 'blog:post-detail' post.id %}">{{ post.title }}
+                     href="{% url 'blog:post-detail' post.slug %}">{{ post.title }}
                   </a>
               </p>              
             </div>
-            <a class="read-more" href="{% url 'blog:post-detail' post.id %}"><small>Read More</small></a>
+            <a class="read-more" href="{% url 'blog:post-detail' post.slug %}"><small>Read More</small></a>
             <div class="post-applause">
               <span class="badge badge-secondary">{{post.likes.count}} NCC Claps</span>
             </div>
