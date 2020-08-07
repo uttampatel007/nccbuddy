@@ -13,7 +13,7 @@ from django.template.defaultfilters import slugify
 
 class Post(models.Model):
     title = models.CharField(max_length=100)
-    slug = models.SlugField(null=True,unique=True)
+    slug = models.SlugField(null=True,unique=True,max_length=111)
     content =  models.TextField()
     image =  models.ImageField(upload_to='post_images')
     image_thumbnail = ImageSpecField(source='image',
