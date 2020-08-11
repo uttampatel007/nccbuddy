@@ -4,19 +4,13 @@
   <title>Login - "nccbuddy.com"</title>
 {% endblock %} 
 {% block content %}
-<div class="card">
-    <div class="card-header"><b>Welcome to nccbuddy.com!</b>
-    </div>
-    <div class="card-body">
-        <p>You can use nccbuddy.com to:</p>
-        <ul>
-            <li>Search and follow your NCC buddies.</li>
-            <li>Write posts on your NCC memories and share knowledge.</li>
-            <li>Expand your reach to cadets across India.</li>
-            <li>Don't have an account yet? <a href="{% url 'register' %}"> Click here</a> to register.</li>
-        </ul>
-    </div>
-</div><br>
+<div>
+    <small class="text-muted">
+        <b>Need An Account?</b> 
+        <a class="ml-2" href="{% url 'register' %}">Sign Up Now</a>
+    </small>
+</div>
+<br>
 <div class="content-section">
     <form method="POST">
         {% csrf_token %}
@@ -32,10 +26,18 @@
         </div>
     </form>
     <div class="border-top pt-3">
-        <small class="text-muted">
-            <b>Need An Account?</b> 
-            <a class="ml-2" href="{% url 'register' %}">Sign Up Now</a>
-        </small>
+        
     </div>
 </div>
+<div class="card">
+    <div class="card-body">
+        <p>You can use nccbuddy.com to:</p>
+        <ul>
+            <li>Search and follow your NCC buddies.</li>
+            <li>Write posts on your NCC memories and share knowledge.</li>
+            <li>Expand your reach to cadets across India.</li>
+            <li>Don't have an account yet? <a href="{% url 'register' %}"> Click here</a> to register.</li>
+        </ul>
+    </div>
+</div><br>
 {% endblock content %}
