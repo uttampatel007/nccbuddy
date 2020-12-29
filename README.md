@@ -1,4 +1,4 @@
-# nccbuddies
+# NCCBUDDY
 Social Media Clone Developed In Django
 ## Getting Started
 This project is basic social media clone with features like user authentication, image with description post, post like, post comment, user profile, user follow/unfollow, post search, user search and much more. Python, Django, HTML, CSS, Bootstrap, JavaScript, AJAX, is used in this project.
