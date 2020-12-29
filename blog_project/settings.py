@@ -6,7 +6,7 @@ SECRET_KEY = '6+_(6czw@+gbm$5q@j6u#ubk^)19o&0+3wi!2u(%x^^y^!d(j#'
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1','139.59.68.250','nccbuddy.com','www.nccbuddy.com']
+ALLOWED_HOSTS = ['127.0.0.1','nccbuddy.com','www.nccbuddy.com']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -122,7 +122,7 @@ TIME_ZONE =  'Asia/Kolkata'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'buddiesncc@gmail.com'
-EMAIL_HOST_PASSWORD = 'wsmpvklfedxtbmuq'
+EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'nccbuddy.com Team <noreply@nccbuddy.com>'
@@ -131,12 +131,12 @@ DEFAULT_FROM_EMAIL = 'nccbuddy.com Team <noreply@nccbuddy.com>'
 
 
 
-AWS_ACCESS_KEY_ID = 'AKIA5IE4BZ6PTPNAFNNB'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'ncc-files'
+AWS_ACCESS_KEY_ID = ''
+AWS_SECRET_ACCESS_KEY = ''
+AWS_STORAGE_BUCKET_NAME = ''
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
-DEFAULT_FILE_STORAGE = 'blog_project.patch_img_uploade.CustomS3Boto3Storage'
+DEFAULT_FILE_STORAGE = ''
 
 AWS_S3_REGION_NAME = 'ap-south-1' 
-AWS_S3_SIGNATURE_VERSION = 's3v4'
+AWS_S3_SIGNATURE_VERSION = ''
