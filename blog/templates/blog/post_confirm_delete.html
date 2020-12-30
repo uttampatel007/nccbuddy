@@ -1,0 +1,24 @@
+ {% extends "blog/base.html" %} 
+ {% block title %}
+   <title>Confirm delete * {{post.title}} - nccbuddy.com</title> 
+ {% endblock %}
+ {% block content %}
+<div class="content-section">
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Delete Post</legend>
+            <h5>Are you sure you want to delete the post?</h5>
+            <h3>"{{ post.title }}"</h3>
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-danger btn-sm" type="submit">Yes, Delete
+            </button>
+            <a class="btn btn-outline-secondary btn-sm"
+               href="{% url 'blog:post-detail' post.id %}">Cancel
+            </a>
+            <br><small>Once post deleted there is now way it can be bring back.</small>
+        </div>
+    </form>
+</div>
+{% endblock content %}

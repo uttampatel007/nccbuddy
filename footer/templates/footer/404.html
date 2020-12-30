@@ -1,0 +1,24 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %} 
+ {% block title %}
+   <title>404 - nccbuddy.com</title> 
+ {% endblock %}
+{% block content %}
+
+	<div class="error-content">
+	    <div class="container">
+	        <div class="row">
+	            <div class="col-md-12 ">
+	                <div class="error-text">
+	                    <h1 class="error">404 Error</h1>
+	                </div>
+                    <h4>Oops! This page Could Not Be Found!</h4>
+                    <p>Sorry bit the page you are looking for does not exist, have been removed or name changed.</p>
+                    <!-- <a href="" class="btn btn-primary btn-round">Go to homepage</a> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+{% endblock content %}

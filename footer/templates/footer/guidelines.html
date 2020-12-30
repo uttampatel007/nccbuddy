@@ -1,0 +1,32 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %} 
+ {% block title %}
+   <title>Guideline - "nccbuddy.com"</title> 
+ {% endblock %}
+ {% block content %}
+
+<div class="content-section">
+
+	<h1>Guidelines</h1>
+	<p>By posting on "nccbuddy.com", you are agreeing to abide by the following community guidelines (‘Guidelines’). Although we will do our utmost to avoid this, "nccbuddy.com" reserves the right to delete, move or otherwise alter posts posted by users if they are deemed to violate these guidelines.</p>
+   <ul>	 
+   		<li>Usernames, posts and profile-info must not contain any profane, offensive, or derogatory terms</li>
+   		<li>Posting of advertisements, promotions, and spam is prohibited</li>
+   		<li>Please don’t post knowingly offensive slurs and discriminatory posts based on race, ethnicity, gender, physical and mental ability, sexual orientation, religion, culture, beliefs or politics. Derogatory statements of any kind are not allowed</li>
+   		<li>No threats of any kind, personal attacks, or harassment</li>
+   		<li>Do not encourage others to violate laws or harm property or people</li>
+   		<li>Profanity is prohibited—whether blatant or censored with special characters</li>
+   		<li>No inflammatory or libelous statements are alloweds</li>
+   		<li>No unlawful content (local, state, or central) is allowed to be posted or linked to</li>
+   		<li>Please don’t impersonate anyone or misrepresent yourself</li>
+   		<li>Don’t post any medical advice, or accept any medical advice from other users</li>
+   		<li>Don’t upload, post, transmit, or make available, any material that contains viruses or any other computer code, programs or files designed to destroy, interrupt, or limit the functionality of any computer software or hardware or telecommunications equipment.</li>
+
+   		<p>Please alert "nccbuddy.com" if you see offensive language, abusive language, spam, self-promotion or advertising, or off-topic posts. The "nccbuddy.com" will take measures to ensure that questionable posts are removed if they violate the community guidelines.<br>
+   		<small><a href="{% url 'community:contact' %}">click here</a> to contact.</small>
+   		</p>
+   </ul>
+
+</div>
+
+{% endblock content %}

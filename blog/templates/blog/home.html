@@ -1,0 +1,61 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% block title %}
+  <title>nccbuddy.com</title>
+{% endblock %}
+{% block content %}
+  <div class="infinite-container">
+    {% for post in posts %}
+    <div class="article-div infinite-item" name="{{post.id}}">
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2"
+                 href="{% url 'profile' post.author.username %}">{{ post.author }}
+              </a>
+              <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}
+              </small>
+            </div>
+            <div class="img-heading-wrap">
+              <div class="article-post-img">
+                <img class="post-img" src="{{post.image_thumbnail.url}}">
+              </div>
+              <p class="h-font">
+                <a class="article-title"
+                     href="{% url 'blog:post-detail' post.slug %}">{{ post.title }}
+                  </a>
+              </p>              
+            </div>
+            <a class="read-more" href="{% url 'blog:post-detail' post.slug %}"><small>Read More</small></a>
+            <div class="post-applause">
+              <span class="badge badge-secondary">{{post.likes.count}} NCC Claps</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    {% empty %}
+      {% include "blog/no_posts_home.html" %}
+    {% endfor %}
+  </div>
+  <div class="loading" style="display: none;">
+    Loading...
+    <br>
+  </div>
+  {% if posts.has_next %}
+    <a class="infinite-more-link" style="display: none;" href="?page={{ posts.next_page_number }}">More</a>
+  {% endif %}
+{% endblock content %}
+
+{% block script %}
+      <script>
+          var infinite = new Waypoint.Infinite({
+            element: $('.infinite-container')[0],
+            onBeforePageLoad: function () {
+              $('.loading').show();
+            },
+            onAfterPageLoad: function ($items) {
+              $('.loading').hide();
+            }
+          });
+      </script>
+{% endblock %}

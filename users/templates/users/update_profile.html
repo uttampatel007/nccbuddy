@@ -1,0 +1,64 @@
+{% extends "blog/base.html" %} 
+{% load static %}
+{% load crispy_forms_tags %} 
+
+{% block title %}<title> @{{request.user.username}} profile update - nccbuddy.com</title>{% endblock %}
+
+{% block content %}
+<div class="content-section">
+    <form method="POST" enctype="multipart/form-data" id="user-update-form">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <div class="profile_update border-bottom">
+                <legend class="mb-3">Update Profile
+                </legend>
+            </div>
+            {{ u_form|crispy }} 
+            {{ p_form|crispy }}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-info btn-sm" type="submit" id="submit-update-btn">Update</button>
+        </div>
+    </form>
+    <a class="nav-item nav-link" style="position: absolute;right: 25px;bottom: 25px;font-size: 15px;" href="{% url 'logout' %}">Logout</a>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+            <b>Change Password?</b>
+            <a class="ml-2" href="{% url 'change-password' %}">click here</a>
+        </small>
+    </div>
+</div>
+<div id="loader">
+    <p style="position: absolute;top: 50%;right: 50%;color: white">Updating...</p>
+</div>
+{% endblock content %}
+
+{% block script %}
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        // $('#div_id_image').children('div').addClass('currentPhoto');
+        // $('.currentPhoto').children('a').hide();
+        // let isTextNode = (_, el) => el.nodeType === Node.TEXT_NODE;
+        // $('.currentPhoto').contents().filter(isTextNode).remove();
+        // var img = document.createElement("IMG");
+        // img.src = '{{ user.profile.image_thumbnail_user.url }}';
+        // img.setAttribute('class', 'account-img');
+        // $('.currentPhoto').prepend('<br>Change Image'); 
+        // $('.currentPhoto').prepend(img);
+        $('#hint_id_camps').html('Add comma between Camps you have attended!');
+        $('#div_id_camps label').html('Camps*');
+
+        $('#submit-update-btn').on('click',function(e){
+            if ($('#id_username').val()!=="" && $('#id_email').val()!==""){
+                $('#loader').show()
+            }
+            else{
+                $('#loader').hide()
+
+            }
+        })
+
+    });
+</script>
+{% endblock %}

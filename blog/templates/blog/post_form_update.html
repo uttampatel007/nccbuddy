@@ -1,0 +1,80 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+ {% block title %}
+   <title>Update post * @{{request.user.username}} - nccbuddy.com</title> 
+ {% endblock %}
+{% block content %}
+
+</style>
+    <div class="content-section">
+        <form action="{% url 'blog:post-update' post.pk%}" method="POST" id="post-form">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Update Post</legend>
+                {{form | crispy}}
+            </fieldset>
+            <div class="form-group" style="display: flex;justify-content: flex-end;">
+                <button class="btn btn-info btn-sm" type="submit" id="form-submit" style="padding: 5px 25px">Update</button>
+            </div>
+        </form>
+        <div class="loading-bar" style="display: none;">
+            <div class="progress">
+                <div id="progress-bar" class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" aria-valuenow="0"aria-valuemin="0" aria-valuemax="100" style="width: 0%">0%</div>
+            </div>
+            <div><br><br>
+                <p>“The enemy are only 50 yards from us. We are heavily outnumbered. We are under devastating fire. I shall not withdraw an inch but will fight to our last man and our last round.”</p>
+                <p style="text-align:right;">-Major Somnath Sharma</p>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block script %}
+<script>
+    $('#post-form').on('submit', function(event){
+        event.preventDefault();
+        $form = $(this)
+        var formData = new FormData(this);
+        $.ajax({
+            xhr : function(){   
+                var xhr = new window.XMLHttpRequest();
+                xhr.upload.addEventListener('progress',function(event){
+                    if (event.lengthComputable){
+                        var percent = Math.round((event.loaded/event.total)*100);
+                        $('.loading-bar').show();
+                        $('#post-form').hide();
+                        $('#progress-bar').attr('aria-valuenow',percent).css('width',percent+'%').text(percent+'%')
+                    }
+                });
+                return xhr;
+            },
+            url : "{% url 'blog:post-update' post.pk %}",
+            type : "POST", 
+            data: formData,
+            processData: false,
+            contentType: false,
+            success : function(json) {
+              window.location.href=(json.url);
+            },
+
+            error : function(xhr,errmsg,err) {
+            }
+        });
+    });
+   
+</script>
+<!-- <script type="text/javascript">
+    $(document).ready(function(){
+        $('#div_id_image').children('div').addClass('currentPhoto');
+        $('.currentPhoto').children('a').hide();
+        let isTextNode = (_, el) => el.nodeType === Node.TEXT_NODE;
+        $('.currentPhoto').contents().filter(isTextNode).remove();
+        var img = document.createElement("IMG");
+        img.src = '{{ post.image_thumbnail.url }}';
+        img.setAttribute('class', 'post-img-update');
+        $('.currentPhoto').prepend('<br>Change Image'); 
+        $('.currentPhoto').prepend(img);
+    });
+</script> -->
+
+{% endblock %}

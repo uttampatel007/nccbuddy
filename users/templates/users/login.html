@@ -1,0 +1,43 @@
+{% extends "blog/base.html" %} 
+{% load crispy_forms_tags %}
+{% block title %}
+  <title>Login - "nccbuddy.com"</title>
+{% endblock %} 
+{% block content %}
+<div>
+    <small class="text-muted">
+        <b>Need An Account?</b> 
+        <a class="ml-2" href="{% url 'register' %}">Sign Up Now</a>
+    </small>
+</div>
+<br>
+<div class="content-section">
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Log In</legend>
+            {{ form|crispy }}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info btn-sm" type="submit">Login</button>
+            <small class="text-muted ml-2">
+                <a href="{% url 'password_reset' %}">Forgot Password?</a>
+            </small>
+        </div>
+    </form>
+    <div class="border-top pt-3">
+        
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <p>You can use nccbuddy.com to:</p>
+        <ul>
+            <li>Search and follow your NCC buddies.</li>
+            <li>Write posts on your NCC memories and share knowledge.</li>
+            <li>Expand your reach to cadets across India.</li>
+            <li>Don't have an account yet? <a href="{% url 'register' %}"> Click here</a> to register.</li>
+        </ul>
+    </div>
+</div><br>
+{% endblock content %}

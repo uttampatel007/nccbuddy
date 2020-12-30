@@ -1,0 +1,26 @@
+ {% extends "blog/base.html" %} 
+ {% load crispy_forms_tags %} 
+ {% block title %}
+  <title>Sign Up - nccbuddy.com</title>
+{% endblock %}
+ {% block content %}
+<div class="content-section">
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Create Your Account</legend>
+            {{ form|crispy }}
+        </fieldset>
+        <div class="form-group">
+            <small>By signing up you are agree to follow nccbuddies guidelines (<a href="{% url 'community:guidelines' %}">click here</a> to read)</small>.<br><br>
+            <button class="btn btn-outline-info btn-sm" type="submit">Sign Up</button>
+        </div>
+    </form>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+                <b>Already Have An Account? </b>
+                <a class="ml-2" href="{% url 'login' %}">Log In</a>
+        </small>
+    </div>
+</div>
+{% endblock content %}

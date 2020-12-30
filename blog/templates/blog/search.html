@@ -1,0 +1,132 @@
+{% extends "blog/base.html" %}
+{% block title %}
+  <title>Search & Recent Posts -  nccbuddy.com</title>
+{% endblock %}
+{% block content %}
+
+        <div class="search-form-div">
+          <form method="POST" class="search-form">
+            {% csrf_token %}
+            <input type="text" name="search" class="search-input" placeholder="search username and posts">
+            <input type="submit" name="" value="Search" class="btn-search">
+          </form>
+        </div>
+
+    {% if message %}
+      <div class="resent-posts">
+        <h1 class="resent-posts-heading">{{message}}</h1>
+      </div>
+    {% endif %}
+    {% if users %}
+        <div class="resent-posts">
+            <h1 class="resent-posts-heading">User result:</h1>
+        </div>
+        <div class="content-section-blue"> 
+          
+          {% for pro in users %}
+            <div class="d-flex flex-row justify-content-between align-items-center">
+                <div class="d-flex flex-row align-items-center">
+                  <a class="link-style-none" href="{% url 'profile' pro.username %}">
+                    <img class="rounded-circle article-img-search" src="{{pro.profile.image_thumbnail_user.url}}" width="55">
+                  </a>
+                  <div class="d-flex flex-column align-items-start ml-2">
+                    <span>{{ pro.profile.name }}</span>
+                    <a class="link-style-none" href="{% url 'profile' pro.username %}"><span class="font-weight-bold">{{pro.username}}</span></a>
+                  </div>
+                </div>
+                <div class="d-flex flex-row align-items-center mt-2">
+                  {% if pro in user.profile.follows.all %}
+                    <p>following</p>
+                  {% endif %}
+                </div>
+            </div>      
+          {% endfor %}
+        </div>
+
+    {% endif %}
+
+    {% if result_posts %}
+        <div class="resent-posts">
+          <h1 class="resent-posts-heading">Post results for: {{search_input}}</h1>
+        </div>
+      {% for post in result_posts %}
+        
+        <article class="media content-section">
+          <img class="rounded-circle article-img"
+               src="{{ post.author.profile.image_thumbnail_user.url }}">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2"
+                 href="{% url 'profile' post.author.username %}">{{ post.author }}
+              </a>
+              <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}
+              </small>
+            </div>
+            <h2><a class="article-title"
+                   href="{% url 'blog:post-detail' post.slug %}">{{ post.title }}
+                </a>
+            </h2>
+            <p class="article-content">{{ post.content|truncatewords:30}}</p>
+            <a class="read-more" href="{% url 'blog:post-detail' post.slug %}"><small>Read More</small></a>
+
+            <div class="post-applause">
+              <span class="badge badge-secondary">{{post.likes.count}} NCC Claps</span>
+            </div>
+            
+          </div>
+        </article>
+    {% endfor %}
+    {% endif %}
+      <div class="resent-posts">
+        <h1 class="resent-posts-heading">Resent Posts:</h1>
+      </div>
+    <div class="infinite-container">
+    {% for post in posts %}
+      <article class="media content-section infinite-item">
+        <img class="rounded-circle article-img" src="{{ post.author.profile.image_thumbnail_user.url }}">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2"
+                 href="{% url 'profile' post.author.username %}">{{ post.author }}
+              </a>
+              <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}
+              </small>
+            </div>
+            <h2><a class="article-title"
+                   href="{% url 'blog:post-detail' post.slug %}">{{ post.title }}
+                </a>
+            </h2>
+            <p class="article-content">{{ post.content|truncatewords:30}}</p>
+            <a class="read-more" href="{% url 'blog:post-detail' post.slug %}"><small>Read More</small></a>
+            <div class="post-applause">
+              <span class="badge badge-secondary">{{post.likes.count}} NCC Claps</span>
+            </div>
+          </div>
+        </article>
+    {% endfor %}
+    </div>
+
+    <div class="loading" style="display: none;">
+      Loading...
+      <br>
+    </div>
+
+
+    {% if posts.has_next %}
+      <a class="infinite-more-link" style="display: none;" href="?page={{ posts.next_page_number }}">More</a>
+    {% endif %}
+{% endblock content %}
+
+{% block script %}
+    <script>
+          var infinite = new Waypoint.Infinite({
+            element: $('.infinite-container')[0],
+            onBeforePageLoad: function () {
+              $('.loading').show();
+            },
+            onAfterPageLoad: function ($items) {
+              $('.loading').hide();
+            }
+          });
+      </script>
+{% endblock %}

@@ -1,0 +1,245 @@
+{% extends "blog/base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block meta %}
+  <meta name="description" content={{post.title}}>
+{% endblock %}
+
+
+{% block title %}<title> {{post.title}} - nccbuddy.com</title>{% endblock %}
+
+{% block content %}
+  <article class="content-section-details">
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="mr-2"
+           href="{% url 'profile' post.author.username %}"><span class="link-style-none">Post by: </span> {{ post.author }}
+        </a>
+        <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+        {% if not post.author == user %}
+        {% if user.is_authenticated %}
+        <a data-target="#ReportModalCenter" data-toggle="modal" class="report-dots">
+          <div class="" style="float: right;">
+            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+            width="24" height="24"
+            viewBox="0 0 172 172"
+            style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#cccccc"><path d="M43,71.66667c-7.91608,0 -14.33333,6.41725 -14.33333,14.33333c0,7.91608 6.41725,14.33333 14.33333,14.33333c7.91608,0 14.33333,-6.41725 14.33333,-14.33333c0,-7.91608 -6.41725,-14.33333 -14.33333,-14.33333zM86,71.66667c-7.91608,0 -14.33333,6.41725 -14.33333,14.33333c0,7.91608 6.41725,14.33333 14.33333,14.33333c7.91608,0 14.33333,-6.41725 14.33333,-14.33333c0,-7.91608 -6.41725,-14.33333 -14.33333,-14.33333zM129,71.66667c-7.91608,0 -14.33333,6.41725 -14.33333,14.33333c0,7.91608 6.41725,14.33333 14.33333,14.33333c7.91608,0 14.33333,-6.41725 14.33333,-14.33333c0,-7.91608 -6.41725,-14.33333 -14.33333,-14.33333z"></path></g></g></svg>
+          </div>
+        </a>
+        {% endif %}
+        {% endif %}
+      </div>
+      {% if post.author == user %}
+          <div>
+            <a class="btn btn-outline-secondary btn-sm mt-1 mb-1"
+               href="{% url 'blog:post-update' post.id %}">Update
+            </a>
+            <a class="btn btn-outline-danger btn-sm mt-1 mb-1"
+               href="{% url 'blog:post-delete' post.id %}">Delete
+            </a>
+          </div>
+          
+      {% endif %}
+    </div>
+
+  </article>
+  <article class="media">
+    <div class="media-body">
+      <h1 class="article-title">{{ post.title }}</h1>
+      <hr>
+      <img class="post-image-detail" src="{{post.image.url}}">
+      <br>
+      <p class="article-content">{{ post.content }}</p>
+    </div>
+  </article>
+  <div class="post-applause-details read-more">
+              <p id="like-count">{{post.likes.count}}</p>
+              <p id="like-count-2" style="display: none;"></p>
+              <a href="" name="{{post.id}}" id="like{{post.id}}" class="like">
+              <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+              id = "unliked"
+              width="30" height="30"
+              viewBox="0 0 172 172"
+              style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#000000"><path d="M96.32,6.88c-3.34594,0 -6.71875,1.34375 -9.245,3.87l-48.0525,48.0525l-2.15,-9.89c-2.49937,-11.31437 -14.16312,-18.14062 -25.2625,-14.835c-0.04031,0 -0.06719,0 -0.1075,0l-2.15,0.645c-1.63937,0.47031 -2.70094,2.06938 -2.4725,3.7625l8.2775,57.7275h0.1075c-0.17469,8.94938 2.95625,18.00625 9.7825,24.8325l13.6525,13.6525c6.07375,6.07375 14.16313,9.00313 22.145,8.815c3.34594,4.70313 7.955,8.61344 13.6525,11.0725l16.2325,7.095c16.58188,7.16219 35.94531,-0.63156 43.1075,-17.2l17.63,-40.9575l12.5775,-29.025c2.84875,-6.57094 -0.18812,-14.25719 -6.7725,-17.0925c-2.06937,-0.90031 -4.23281,-1.06156 -6.3425,-0.86l3.1175,-7.31c2.83531,-6.57094 -0.20156,-14.25719 -6.7725,-17.0925c-2.45906,-1.06156 -5.0525,-1.11531 -7.525,-0.645c0.34938,-5.34812 -2.45906,-10.66937 -7.6325,-12.9c-0.645,-0.28219 -1.27656,-0.47031 -1.935,-0.645c-0.56437,-0.9675 -1.22281,-1.86781 -2.0425,-2.6875c-2.52625,-2.52625 -5.89906,-3.87 -9.245,-3.87c-3.34594,0 -6.61125,1.34375 -9.1375,3.87l-0.9675,0.9675c-0.59125,-2.01562 -1.63937,-3.89687 -3.225,-5.4825c-2.52625,-2.52625 -5.89906,-3.87 -9.245,-3.87zM96.32,13.76c1.57219,0 3.07719,0.60469 4.3,1.8275c1.76031,1.76031 2.16344,4.1925 1.3975,6.3425c-4.21937,0.72563 -7.98187,3.45344 -9.7825,7.6325l-2.2575,5.375l-0.1075,0.1075c-0.04031,0.04031 -0.06719,0.06719 -0.1075,0.1075l-18.49,18.5975c-1.02125,0.83313 -1.49156,2.16344 -1.19594,3.45344c0.29562,1.27656 1.30344,2.28438 2.58,2.58c1.29,0.29563 2.62031,-0.17469 3.45344,-1.19594l6.3425,-6.3425l-17.0925,39.6675l-5.6975,-8.2775c-6.49031,-9.59437 -19.80687,-11.67719 -28.9175,-4.515l-1.8275,1.505c-1.34375,1.04813 -1.70656,2.92938 -0.86,4.4075l27.95,48.9125h0.1075c0.25531,0.81969 0.5375,1.66625 0.86,2.4725c-4.89125,-0.65844 -9.66156,-2.88906 -13.4375,-6.665l-13.545,-13.6525c-5.59,-5.59 -8.21031,-12.88656 -7.955,-20.21c-0.01344,-0.215 -0.05375,-0.43 -0.1075,-0.645l-7.74,-54.61c7.16219,-1.74687 14.2975,2.48594 15.91,9.7825l3.5475,16.0175c0.29563,1.22281 1.22281,2.19031 2.43219,2.52625c1.19594,0.3225 2.49938,-0.01344 3.37281,-0.91375l52.46,-52.46c1.22281,-1.22281 2.83531,-1.8275 4.4075,-1.8275zM118.895,18.275c0.86,0 1.77375,0.17469 2.58,0.5375c-2.78156,1.33031 -5.14656,3.62813 -6.45,6.665l-0.645,1.3975c-0.95406,-1.24969 -2.01562,-2.365 -3.3325,-3.225l3.5475,-3.5475c1.22281,-1.22281 2.72781,-1.8275 4.3,-1.8275zM126.7425,24.4025c0.04031,0 0.06719,0 0.1075,0c0.51063,0.20156 1.06156,0.26875 1.6125,0.215c0.02688,0.01344 0.08063,-0.01344 0.1075,0c0.29563,0.08063 0.57781,0.20156 0.86,0.3225c3.15781,1.37063 4.59563,4.90469 3.225,8.0625l-2.4725,5.805c-0.02687,0.05375 -0.08062,0.05375 -0.1075,0.1075l-20.21,46.7625c-0.73906,1.74688 0.08063,3.77594 1.8275,4.515c1.74688,0.73906 3.77594,-0.08062 4.515,-1.8275l20.21,-46.7625c1.37063,-3.15781 4.90469,-4.59562 8.0625,-3.225c3.15781,1.37063 4.59563,5.01219 3.225,8.17l-7.6325,17.63l-12.5775,29.025c-0.76594,1.74688 0.02688,3.80281 1.77375,4.56875c1.74688,0.77938 3.80281,-0.02687 4.56875,-1.77375l12.5775,-29.1325c1.37063,-3.15781 4.90469,-4.59562 8.0625,-3.225c3.15781,1.37063 4.58219,4.91813 3.225,8.0625c0,0.04031 0,0.06719 0,0.1075l-12.5775,29.025l-17.63,40.9575c-5.68406,13.15531 -20.80125,19.22906 -33.97,13.545l-16.34,-6.9875c-5.03906,-2.17687 -9.00312,-5.77812 -11.7175,-10.105c-1.37062,-2.17687 -2.41875,-4.515 -3.1175,-6.9875c-0.08062,-0.26875 -0.18812,-0.51062 -0.3225,-0.7525l-26.5525,-46.225c6.02,-4.28656 14.2975,-2.96969 18.49,3.225l9.245,13.545c0.71219,0.99438 1.89469,1.53188 3.10406,1.42438c1.22281,-0.1075 2.28437,-0.86 2.80844,-1.96188l0.3225,-0.645l29.1325,-67.6175c1.37063,-3.15781 5.01219,-4.48812 8.17,-3.1175c3.15781,1.37063 4.48813,4.90469 3.1175,8.0625l-17.63,40.85c-0.73906,1.74688 0.08063,3.77594 1.8275,4.515c1.74688,0.73906 3.77594,-0.08062 4.515,-1.8275l17.63,-40.85l5.0525,-11.7175c0.68531,-1.58562 1.97531,-2.75469 3.44,-3.3325c0.63156,-0.25531 1.35719,-0.40312 2.0425,-0.43z"></path></g></g></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" 
+                id = "liked"
+                width="30" height="30"
+                viewBox="0 0 172 172"
+                style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#333333"><path d="M92.88,6.88c-2.06937,0 -4.12531,0.77938 -5.6975,2.365l-43.86,43.7525l-9.7825,9.89l-3.44,-16.0175c-2.08281,-9.40625 -11.73094,-14.99625 -20.9625,-12.255l-2.2575,0.645l7.955,55.7925c-0.87344,8.6 2.01563,17.49563 8.6,24.08l12.47,12.47c5.02563,5.02563 11.5025,7.87438 18.06,8.4925l-25.9075,-45.15c-1.69312,-2.95625 -0.95406,-6.70531 1.72,-8.815l1.8275,-1.3975c4.17906,-3.29219 9.20469,-5.0525 14.5125,-5.0525c7.80719,0 15.07688,3.85656 19.4575,10.32l2.15,3.1175l0.5375,-1.1825l24.295,-56.4375l-24.08,24.08l-2.365,-2.365l32.465,-32.5725c3.15781,-3.15781 3.15781,-8.23719 0,-11.395c-1.57219,-1.57219 -3.62812,-2.365 -5.6975,-2.365zM115.7775,11.825c-2.15,0 -4.27312,0.83313 -5.9125,2.4725l-8.9225,8.815c1.73344,-0.68531 3.655,-1.075 5.59,-1.075c2.0425,0 4.03125,0.36281 5.9125,1.1825c1.49156,0.645 2.795,1.53188 3.9775,2.58c1.73344,-3.03687 4.46125,-5.29437 7.6325,-6.5575c-0.215,-1.81406 -0.98094,-3.56094 -2.365,-4.945c-1.63937,-1.63937 -3.7625,-2.4725 -5.9125,-2.4725zM129.7525,25.0475c-3.26531,-0.02687 -6.35594,1.85438 -7.74,5.0525l-23.22,53.6425l-3.1175,-1.29l18.275,-42.2475c1.77375,-4.09844 -0.20156,-8.86875 -4.3,-10.6425c-4.09844,-1.77375 -8.76125,0.09406 -10.535,4.1925l-24.6175,56.8675l-5.4825,12.7925l-9.1375,-13.545c-5.40187,-7.98187 -16.39375,-9.72875 -23.9725,-3.7625l-1.8275,1.3975l27.95,48.9125c2.365,8.31781 8.33125,15.54719 16.8775,19.2425l16.2325,7.095c14.87531,6.42313 32.16938,-0.51062 38.5925,-15.3725l17.63,-40.9575l13.115,-30.2075c1.81406,-4.21937 -0.18812,-9.15094 -4.4075,-10.965c-4.21937,-1.81406 -9.04344,0.08063 -10.8575,4.3l-13.115,30.315l-2.9025,-1.29l20.64,-47.73c1.85438,-4.28656 -0.12094,-9.33906 -4.4075,-11.18c-4.28656,-1.84094 -9.33906,0.12094 -11.18,4.4075l-20.64,47.8375l-3.3325,-1.505l23.1125,-53.6425c1.84094,-4.25969 -0.04031,-9.23156 -4.3,-11.0725c-1.06156,-0.45687 -2.24406,-0.63156 -3.3325,-0.645z"></path></g></g></svg>
+              </a>
+              <p>NCC Claps</p>
+              <a data-target="#ShareModalCenter" data-toggle="modal">
+                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                width="30" height="30"
+                viewBox="0 0 172 172"
+                style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g><path d="M2.65391,86c0,-46.02344 37.32266,-83.34609 83.34609,-83.34609c46.02344,0 83.34609,37.32266 83.34609,83.34609c0,46.02344 -37.32266,83.34609 -83.34609,83.34609c-46.02344,0 -83.34609,-37.32266 -83.34609,-83.34609z" fill="#333333"></path><path d="M51.86875,68.22891c-9.98168,0 -18.07344,8.09175 -18.07344,18.07344c0,9.98168 8.09175,18.07344 18.07344,18.07344c9.98168,0 18.07344,-8.09175 18.07344,-18.07344c0,-9.98168 -8.09175,-18.07344 -18.07344,-18.07344zM107.06328,36.07969c-9.98168,0 -18.07344,8.09175 -18.07344,18.07344c0,9.98168 8.09175,18.07344 18.07344,18.07344c9.98168,0 18.07344,-8.09175 18.07344,-18.07344c0,-9.98168 -8.09175,-18.07344 -18.07344,-18.07344zM107.06328,99.77344c-9.98168,0 -18.07344,8.09175 -18.07344,18.07344c0,9.98168 8.09175,18.07344 18.07344,18.07344c9.98168,0 18.07344,-8.09175 18.07344,-18.07344c0,-9.98168 -8.09175,-18.07344 -18.07344,-18.07344z" fill="#ffffff"></path><g fill="#ffffff"><path d="M104.62301,49.36269l4.88567,8.3897l-55.18622,32.1372l-4.88567,-8.3897z"></path></g><g fill="#ffffff"><path d="M54.31946,81.5051l55.18622,32.1372l-4.88567,8.3897l-55.18622,-32.1372z"></path></g></g></g></svg>
+        </a>
+  </div>
+  {% if user.is_authenticated %}
+  <div class="article-form">
+    <form method="POST" class="">{% csrf_token %}
+      {{form | crispy}}
+      <button type="submit" class="btn btn-primary" style="float: right;">Post</button>
+    </form>
+  </div>
+  {% endif %}
+  <br>
+<div class="comments">
+  <p>{{comments.count}} Comments</p>
+  {% for comment in comments %}
+  <div class="comments-inside">
+    <a class="link-style-none" href="{% url 'profile' comment.author.username %}">
+      <img class="rounded-circle article-img-comment" src="{{comment.author.profile.image_thumbnail_user.url}}" width="55">
+    </a>
+    <article class="media content-section-blue">
+      <div class="media-body">
+        <small>{{ comment.author }} - {{comment.date_posted}}</small>
+        <p class="article-content">{{ comment.comment}}</p>
+      </div>
+    </article>
+  </div>
+  
+  {% endfor %}
+</div>
+
+<div class="modal fade" id="ReportModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Report Post</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="overflow: hidden;">
+        <form action="{% url 'blog:report' %}" method="POST" id="report-form" name="{{post.id}}">
+          {% csrf_token %}
+          {{report_form | crispy}}
+          <button type="submit" class="btn btn-outline-primary" style="float: right;">Report</button>
+        </form>
+        <p id="report-message" style="display: none;">Your response has been reported.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="ShareModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Share</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="overflow: hidden;">
+        <a href="{{post.twitter_share_url}}" target="_blank">Share on Twitter!</a>
+        <br>
+        <a href="{{post.facebook_share_url}}" target="_blank">Share on Facebook!</a>
+        <br>
+        <a href="{{post.whatsapp_share_url}}" target="_blank">Share on WhatsApp!</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock content %}
+
+{% block script %}
+{% if user in post.likes.all %}
+<script>
+    $(document).ready(function () {
+      $('#unliked').hide()
+    });
+</script>
+{% else %}
+<script type="text/javascript">
+    $(document).ready(function () {
+      $('#liked').hide()
+    });
+</script>
+{% endif %}
+
+<script>
+$(document).ready(function () {
+$('.like').click(function(event){
+      event.preventDefault();
+      $.ajax({
+               type: "POST",
+               url: "{% url 'blog:like' %}",
+               data: {'pk': $(this).attr('name'), 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+               dataType: "json",
+               success: function(response) {
+                      if (response.like) {
+                        $('#liked').show();
+                        $('#unliked').hide();
+                        $('#like-count').text(response.likes_count);
+
+                      } else {
+                        $('#liked').hide();
+                        $('#unliked').show();
+                        $('#like-count').text(response.likes_count);
+                      }
+                },
+
+                error: function(rs, e) {
+                       alert('Poor network try again or refresh the page.');
+
+
+                }
+          }); 
+    });
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function () {
+
+$('#report-form').on('submit',function(event){
+
+    event.preventDefault();
+    $.ajax({
+      url: "{% url 'blog:report' %}",
+      type: "POST",
+      data: {'reason':$('#id_reason').val(),'pk': $(this).attr('name'),'csrfmiddlewaretoken': '{{ csrf_token }}'},
+      success: function(response) {
+            
+              $('#report-form').hide();
+              $('#report-message').show();
+
+          },
+      error: function(rs, e) {
+            $('#report-form').hide();
+            $('#report-message').show();
+          },
+    })
+    
+});
+
+
+});
+  
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(".article-content").each(function(data){
+      var UserReg = /(^|\s)@([\w\d-]+)/g
+      var NewText = $(this).html().match(UserReg, "$1<a href='/$2/'>@$2</a>")
+      var NewText = $(this).html().replace(UserReg, "$1<a href='/$2/'>@$2</a>")
+      $(this).html(NewText)
+    })
+  })
+</script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(".article-content").each(function(data){
+      var LinkReg = /(https?:\/\/[^\s]+)/g;
+      var LinkText = $(this).html().match(LinkReg)
+      var LinkText = $(this).html().replace(LinkReg, "<a href="+LinkText+">"+LinkText+"</a>")
+      $(this).html(LinkText)
+    })
+  })
+</script>
+{% endblock %}

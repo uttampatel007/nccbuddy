@@ -1,0 +1,18 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %} 
+ {% block title %}
+   <title>Sponsor - "nccbuddy.com"</title> 
+ {% endblock %}
+ {% block content %}
+
+<div class="content-section">
+
+	<h1>Sponsor</h1>
+	<ul>
+		<li>For sponsoring and ads contact us(<a href="{% url 'community:contact' %}">click here</a>).
+		</li>
+	</ul>
+
+</div>
+
+{% endblock content %}

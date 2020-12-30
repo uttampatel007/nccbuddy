@@ -1,0 +1,27 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %} 
+ {% block title %}
+   <title>Contact - nccbuddy.com</title> 
+ {% endblock %}
+ {% block content %}
+
+<div class="content-section">
+
+	{% if message %}
+		<p>{{message}}</p>
+	{% else %}
+		<form method="POST">
+	        {% csrf_token %}
+	        <fieldset class="form-group">
+	            <legend class="border-bottom mb-4">Contact</legend>
+	            <p>Message, Quries and Feedbacks are welcome.</p>
+	            {{ form|crispy }}
+	        </fieldset>
+	        <div class="form-group">
+	            <button class="btn btn-outline-info btn-sm" type="submit">Send</button>
+	        </div>
+	    </form>
+	{% endif %}
+</div>
+
+{% endblock content %}
