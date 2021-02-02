@@ -194,9 +194,12 @@
                   
                   data.facts.forEach(myFunc)
                   function myFunc(fact) {
-                    $('#facts-div').append('<p class=text-muted>'+fact+'</p>')
+                    var newItem = '<p class=text-muted>'+fact+'</p>';
+                    $('#facts-div').hide();
+                    $('#facts-div').append(newItem);
+                    $('#facts-div').slideDown('slow');
+
                   }
-                  
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                 }
