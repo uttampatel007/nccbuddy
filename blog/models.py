@@ -126,4 +126,4 @@ def comment_added_notify(sender, instance, *args, **kwargs):
 
 @receiver(pre_save,sender=Post)
 def sulg_generator(sender, instance, *args, **kwargs):
-    instance.slug = slugify(instance.title)
+    instance.slug = slugify(instance.title+" "+str(sender.objects.count()))
