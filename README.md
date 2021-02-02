@@ -17,7 +17,7 @@ Infinty scroll and much more. Python, Django, HTML, CSS, Bootstrap, JavaScript, 
 
 ### ToDo 
 -Adding explaination comments
--Adding chat 
+, Adding chat, Creating RestApi
 
 ### Prerequisites
 Things you need to install the project and how to install them

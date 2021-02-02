@@ -30,13 +30,17 @@ INSTALLED_APPS = [
     'imagekit', 
     'storages',
 
+    #rest-framework
+    'nccbuddy_restapi',
+    'rest_framework',
+
 ]
 
 DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
 DBBACKUP_STORAGE_OPTIONS = {'location':  os.path.join(BASE_DIR, 'backup')}
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
+    'django.MIDDLEWAREe.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
