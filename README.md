@@ -14,6 +14,11 @@ Mobile Responsive,
 Post Share,
 Mention User with @,
 Infinty scroll and much more. Python, Django, HTML, CSS, Bootstrap, JavaScript, AJAX, is used in this project.
+
+### ToDo 
+-Adding explaination comments
+-Adding chat 
+
 ### Prerequisites
 Things you need to install the project and how to install them
 ```
