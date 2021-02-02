@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     #rest-framework
     'nccbuddy_restapi',
     'rest_framework',
+    'rest_framework.authtoken',
 
 ]
 
@@ -92,6 +93,17 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    )
+}
+
 
 
 LANGUAGE_CODE = 'en-us'
