@@ -8,6 +8,8 @@ from django.contrib.auth import update_session_auth_hash
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm,ReportUserForm
 from blog.models import Post, Notification
 from django.contrib.auth.models import User
+from django.http import JsonResponse
+
 
 def register(request):
     if request.method == 'POST':
@@ -25,6 +27,14 @@ def register(request):
     template_name = 'users/register.html'
     
     return render(request, template_name, context)
+
+def validate_username(request):
+    username = request.GET.get('username',None)
+    data = {
+        'is_taken':User.objects.filter(username__iexact=username).exists()
+    }
+    print(data)
+    return JsonResponse(data)
 
 
 # @login_required

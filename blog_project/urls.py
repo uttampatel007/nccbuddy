@@ -24,6 +24,7 @@ urlpatterns = [
     path('account/password-reset-complete/',auth_views.PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'),name='password_reset_complete'),  
     path('account/community/', include('footer.urls', namespace='community')),
     path('<str:username>/', user_views.profile, name='profile'),
+    path('validate/username/', user_views.validate_username,name='validate-username'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
