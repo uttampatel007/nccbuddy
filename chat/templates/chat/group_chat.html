@@ -3,8 +3,8 @@
 {% block content %}
 <div class="content-section">
     <div style="display: flex; align-items: center;">
-        <img src="{{ chat_user.profile.image_thumbnail_user.url }}" class="rounded-circle chat-image" alt="Profile">    
-        <p><b>{{ chat_user.username }}</b></p>
+        <img src="{% static 'blog/img/chat.png' %}" class="rounded-circle chat-image" alt="Profile">    
+        <p><b>{{ chat_room.group_name }}</b></p>
     </div>
     <hr>
     <div id="messages">
@@ -85,8 +85,8 @@
         chatSocket.send(JSON.stringify({
             'message': message,
             'username': '{{ request.user.username }}',
-            'recipient': '{{ chat_user.username }}',
-            'is_group': false
+            'is_group': true,
+            'recipient': NaN
         }))
         form.reset()
     })

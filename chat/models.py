@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 class ChatRoom(models.Model):
     room_name = models.CharField(max_length=100, unique=True)
     participants = models.ManyToManyField(User)
+    is_group_chat = models.BooleanField(default=False)
+    group_name = models.CharField(max_length=100, blank=True, null=True)
 
 
 class Message(models.Model):
@@ -14,7 +16,5 @@ class Message(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
 
     is_group_message = models.BooleanField(default=True)
-    recipient = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='recipient', 
-        blank=True, null=True)
+    recipient = models.ManyToManyField(User, blank=True, related_name='recipient')
 

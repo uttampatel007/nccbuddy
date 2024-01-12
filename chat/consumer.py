@@ -29,24 +29,29 @@ class ChatConsumer(WebsocketConsumer):
         message_text = text_data_json['message']
         username = text_data_json['username']
         recipient = text_data_json['recipient']
+        is_group = text_data_json['is_group']
+        
         room_name = self.room_name
-
-        # Retrieve the user object using the username
-        sender_user = User.objects.get(username=username)
-        recipient_user = User.objects.get(username=recipient)
-
         # Retrieve or create the chat room
         chat_room, created = ChatRoom.objects.get_or_create(room_name=room_name)
-        chat_room.participants.add(recipient_user)
+        sender_user = User.objects.get(username=username)
         
         # Create a new message and save it to the database
         message = Message.objects.create(
             room=chat_room,
             sender=sender_user,
             message=message_text,
-            is_group_message=False,
-            recipient=recipient_user
+            is_group_message=is_group,
         )
+
+        if is_group:
+            recipient = chat_room.participants.exclude(username=username)
+            chat_room.participants.add(*recipient)
+            message.recipient.add(*recipient)
+        else:
+            recipient = User.objects.get(username=recipient)
+            chat_room.participants.add(recipient)
+            message.recipient.add(recipient)
         
         # Broadcast the message to other users in the room (as you're already doing)
         async_to_sync(self.channel_layer.group_send)(
