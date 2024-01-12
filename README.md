@@ -5,24 +5,25 @@ This project is basic social media features.
 ### Feature List:
  
 - User authentication
-- User Chat
+- One to One Chat
+- Group Chat
 - Image with Description Post
 - Post like
 - Post comment
 - User profile
-- User follow/unfollow
+- User follow / unfollows
 - Post search
 - User search
 - Post Share
 - Mention User with @
 - Mobile Responsive
-- Infinty scroll and much more. 
+- Infinity scroll and much more. 
 
 ### Tech Stack
-Python, Django, HTML, CSS, Bootstrap, JavaScript, AJAX, Django Channels, Websockets
+Python, Django, HTML, CSS, Bootstrap, JavaScript, AJAX, Django Channels, Websocket
 
 ### Support 
--> Django5
+Django 5.0
 
 ## Getting Started
 

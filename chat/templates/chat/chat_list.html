@@ -1,24 +1,82 @@
 {% extends "blog/base.html" %}
 {% load static %}
-{% block content %}
 
-<div class="">
+{% block content %}
+<div class="container">
+  <div class="mb-2" style="display: flex; justify-content: space-between;">
     <h2>Your Chats</h2>
-    <div class="container">
-        <ul class="list-group">
-          {% for chat_room in chat_rooms %}
-            {% for participant in chat_room.participants.all %}
-              {% if participant.username != request.user.username %}
-                <li class="list-group-item">
-                    <img src="{{ participant.profile.image_thumbnail_user.url }}" class="rounded-circle chat-image" alt="Profile">
-                  <a href="{% url 'chat:chat' participant.username %}">{{ participant.username }}</a>
-                </li>
-              {% endif %}
-            {% endfor %}
+    <a href="#" data-toggle="modal" data-target="#createGroupModal">
+      <button class="btn btn-info btn-sm">Create Group</button>
+    </a>
+  </div>
+  <div class="">
+    <!-- <ul class="list-group">
+      {% for chat_room in chat_rooms %}
+        {% for participant in chat_room.participants.all %}
+          {% if participant.username != request.user.username %}
+            <li class="list-group-item">
+              <img src="{{ participant.profile.image_thumbnail_user.url }}" class="rounded-circle chat-image" alt="Profile">
+              <a href="{% url 'chat:chat' participant.username %}">{{ participant.username }}</a>
+            </li>
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+    </ul> -->
+    <ul class="list-group">
+      {% for chat_room in chat_rooms %}
+        {% if chat_room.is_group_chat %}
+          <!-- Display group chat information with default group image -->
+          <li class="list-group-item">
+            <img src="{% static 'blog/img/chat.png' %}" class="rounded-circle chat-image" alt="Group Image">
+            <a href="{% url 'chat:group_chat' chat_room.room_name %}">{{ chat_room.group_name }}</a>
+          </li>
+        {% else %}
+          <!-- Display individual participant information -->
+          {% for participant in chat_room.participants.all %}
+            {% if participant.username != request.user.username %}
+              <li class="list-group-item">
+                <img src="{{ participant.profile.image_thumbnail_user.url }}" class="rounded-circle chat-image" alt="Profile">
+                <a href="{% url 'chat:chat' participant.username %}">{{ participant.username }}</a>
+              </li>
+            {% endif %}
           {% endfor %}
-        </ul>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+<!-- Create Group Modal -->
+<div class="modal fade" id="createGroupModal" tabindex="-1" role="dialog" aria-labelledby="createGroupModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="createGroupModalLabel">Create Group</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
+      <div class="modal-body">
+        <form id="createGroupForm" method="post" action="">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="groupName">Group Name:</label>
+            <input type="text" class="form-control" id="groupName" name="group_name" required>
+          </div>
+          <div class="form-group">
+            <label>Participants:</label>
+            {% for participant in all_participants %}
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="{{ participant.username }}" name="participants" value="{{ participant.username }}">
+                <label class="form-check-label" for="{{ participant.username }}">{{ participant.username }}</label>
+              </div>
+            {% endfor %}
+          </div>
+          <button type="submit" class="btn btn-primary">Create Group</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 
 {% endblock %}
-
