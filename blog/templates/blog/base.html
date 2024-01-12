@@ -15,7 +15,7 @@
           crossorigin="anonymous">    
     <link rel="stylesheet" type="text/css"
           href="{% static 'blog/css/main.css' %}">
-    
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     {% block title %}{% endblock %}
 
     
@@ -48,8 +48,11 @@
                 </a>
                 <a class="nav-item nav-link" href="{% url 'profile' request.user.username %}">Profile
                 </a>
+                <a class="nav-item nav-link" href="{% url 'chat:chat_list' %}">
+                  Chat <i class="fa-brands fa-rocketchat"></i>
+                </a>
                 <a class="nav-item nav-link" href="{% url 'blog:notifications' request.user.username %}">
-                  Notification <span class="badge badge-light" style="display: none;" id="notifications-count"></span>
+                  <i class="fa-solid fa-bell"></i> <span class="badge badge-light" style="display: none;" id="notifications-count"></span>
                 </a>
               {% else %}
                 <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>

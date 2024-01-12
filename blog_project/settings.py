@@ -9,6 +9,10 @@ DEBUG = True
 ALLOWED_HOSTS = ['127.0.0.1','nccbuddy.com','www.nccbuddy.com']
 
 INSTALLED_APPS = [
+
+    # channels
+    'daphne',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -21,6 +25,7 @@ INSTALLED_APPS = [
     'blog',
     'users.apps.UsersConfig',
     'footer',
+    'chat',
 
     # Third_party_apps.
     'crispy_forms',
@@ -34,6 +39,14 @@ INSTALLED_APPS = [
 
 DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
 DBBACKUP_STORAGE_OPTIONS = {'location':  os.path.join(BASE_DIR, 'backup')}
+
+ASGI_APPLICATION = 'blog_project.asgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    }
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -75,18 +88,18 @@ DATABASES = {
 
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    # },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    # },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    # },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    # },
 ]
 
 
@@ -118,3 +131,4 @@ TIME_ZONE =  'Asia/Kolkata'
 
 
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

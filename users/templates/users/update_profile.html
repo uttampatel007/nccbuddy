@@ -20,12 +20,16 @@
             <button class="btn btn-info btn-sm" type="submit" id="submit-update-btn">Update</button>
         </div>
     </form>
-    <a class="nav-item nav-link" style="position: absolute;right: 25px;bottom: 25px;font-size: 15px;" href="{% url 'logout' %}">Logout</a>
-    <div class="border-top pt-3">
+    
+    <div class="border-top pt-3" >
         <small class="text-muted">
             <b>Change Password?</b>
             <a class="ml-2" href="{% url 'change-password' %}">click here</a>
         </small>
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button class="btn btn-danger btn-sm" type="submit">logout</button>
+        </form>
     </div>
 </div>
 <div id="loader">
