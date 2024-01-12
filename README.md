@@ -21,6 +21,8 @@ This project is basic social media features.
 ### Tech Stack
 Python, Django, HTML, CSS, Bootstrap, JavaScript, AJAX, Django Channels, Websockets
 
+### Support 
+-> Django5
 
 ## Getting Started
 
