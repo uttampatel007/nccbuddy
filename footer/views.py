@@ -31,14 +31,14 @@ def about(request):
 	return render(request,'footer/about.html')
 
 def facts(request):
-	facts = Facts.objects.all()
-	facts_list = []
-	for fact in facts:
-		facts_list.append(fact.fact)
-	random_facts = random.sample(facts_list, 3)
+	# facts = Facts.objects.all()
+	# facts_list = []
+	# for fact in facts:
+	# 	facts_list.append(fact.fact)
+	# random_facts = random.sample(facts_list, 3)
 	data = {
 
-		'facts':random_facts
+		'facts':[]
 
 	}
 	return JsonResponse(data)

@@ -20,7 +20,7 @@ WING = [
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=25,blank=True)
-    image = models.ImageField(default='default.png', upload_to='profile_pics')
+    image = models.ImageField(upload_to='profile_pics')
     image_thumbnail_user = ImageSpecField(source='image',
                                       processors=[Transpose(),ResizeToFill(170, 170)],
                                       format='JPEG',
@@ -46,7 +46,7 @@ REASON = [
 
 class UserReport(models.Model):
     reported_user = models.ForeignKey(User, on_delete=models.CASCADE,related_name='reported_user')
-    reason = models.CharField(max_length=10,choices=REASON)
+    reason = models.CharField(max_length=13,choices=REASON)
     reporting_user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='reporting_user')
     date_reported = models.DateTimeField(default=timezone.now) 
 

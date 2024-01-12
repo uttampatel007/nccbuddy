@@ -1,0 +1,24 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="">
+    <h2>Your Chats</h2>
+    <div class="container">
+        <ul class="list-group">
+          {% for chat_room in chat_rooms %}
+            {% for participant in chat_room.participants.all %}
+              {% if participant.username != request.user.username %}
+                <li class="list-group-item">
+                    <img src="{{ participant.profile.image_thumbnail_user.url }}" class="rounded-circle chat-image" alt="Profile">
+                  <a href="{% url 'chat:chat' participant.username %}">{{ participant.username }}</a>
+                </li>
+              {% endif %}
+            {% endfor %}
+          {% endfor %}
+        </ul>
+      </div>
+</div>
+
+{% endblock %}
+
