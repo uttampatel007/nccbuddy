@@ -5,18 +5,18 @@ This project is basic social media features.
 ### Feature List:
  
 - User authentication
-- One to One Chat
-- Group Chat
-- Image with Description Post
+- One to one chat
+- Group chat
+- Post with image and description
 - Post like
 - Post comment
 - User profile
 - User follow / unfollows
 - Post search
 - User search
-- Post Share
-- Mention User with @
-- Mobile Responsive
+- Post share
+- Mention user with @ in description and comments
+- Mobile responsive
 - Infinity scroll and much more. 
 
 ### Tech Stack
